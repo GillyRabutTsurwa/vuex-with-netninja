@@ -3,6 +3,9 @@
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <ProductListOne v-bind:productsProp="products" />
     <ProductListTwo v-bind:productsProp="products" />
+    <p>
+      <strong>On voit rien parce que on a déplacé nos données d'ici à notre secteur central et on ne les a pas encore utilisées</strong>
+    </p>
   </div>
 </template>
 
@@ -16,26 +19,7 @@ export default {
     ProductListTwo: ProductListTwo
   },
   data() {
-    return {
-      products: [
-        {
-          name: "Banana Skin",
-          price: 20
-        },
-        {
-          name: "Shiny Star",
-          price: 40
-        },
-        {
-          name: "Red Shells",
-          price: 60
-        },
-        {
-          name: "Green Shells",
-          price: 80
-        }
-      ]
-    };
+    return {};
   }
 };
 </script>
