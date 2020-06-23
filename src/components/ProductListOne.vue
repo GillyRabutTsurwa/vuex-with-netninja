@@ -2,7 +2,7 @@
   <div id="product-list-one">
     <h2>Product List One</h2>
     <ul>
-      <li v-for="(currentProduct, index) in productsProp" v-bind:key="index">
+      <li v-for="(currentProduct, index) in storeProducts" v-bind:key="index">
         <span class="name">{{currentProduct.name}}</span>
         <span class="price">${{currentProduct.price}}</span>
       </li>
@@ -12,10 +12,18 @@
 
 <script>
 export default {
-  props: {
-    productsProp: {
-      type: Array
+  //NEWIMPORTANT: use computed property to fetch vuex store data
+  computed: {
+    storeProducts() {
+      // code to fetch data from the store. Very easy to decipher.
+      // wrote same exact code in other component.
+      return this.$store.state.products;
     }
+  },
+  // Created this created hook to see what the data structure of our store data looks like. J'ai pas fait sur l'autre component.
+  created() {
+    console.log(this.$store);
+    console.log(this.$store.state);
   }
 };
 </script>
