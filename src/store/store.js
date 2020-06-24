@@ -4,6 +4,8 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
+    // NEWNOTE: with strict sent to true, on va obtenir une erreur si on essaie de transformer l'état hors de mutations "handler".
+    strict: true,
     state: {
         products: [{
                 name: "Banana Skin",
@@ -23,17 +25,24 @@ export const store = new Vuex.Store({
             }
         ]
     },
-    //NEW: GETTERS
-    //NOTE: We are NOT manipulating the data in our state. We are using the data in our state to return a manipulated value (using a variable) WITHOUT changing the data. In this case, we are looping through the products array in our state. We are not changing it in any way, shape or form.
+    // Not using the getter function but will leave it here regardless.
     getters: {
-        saleProducts: (state) => {
-            let productsOnSale = state.products.map((currentProduct) => {
-                return {
-                    name: `**${currentProduct.name}**`,
-                    price: currentProduct.price / 2
-                };
+        // saleProducts: (state) => {
+        //     let productsOnSale = state.products.map((currentProduct) => {
+        //         return {
+        //             name: `**${currentProduct.name}**`,
+        //             price: currentProduct.price / 2
+        //         };
+        //     });
+        //     return productsOnSale;
+        // }
+    },
+    //NEW: WITH MUTATIONS, we do plan on changing the data from the original state
+    mutations: {
+        reducePrice: (state) => {
+            state.products.forEach((currentProduct) => {
+                currentProduct.price -= 1;
             });
-            return productsOnSale;
         }
     }
 });

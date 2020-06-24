@@ -2,37 +2,33 @@
   <div id="product-list-one">
     <h2>Product List One</h2>
     <ul>
-      <li v-for="(currentProduct, index) in saleProducts" v-bind:key="index">
+      <li v-for="(currentProduct, index) in storeProducts" v-bind:key="index">
         <span class="name">{{currentProduct.name}}</span>
         <span class="price">${{currentProduct.price}}</span>
       </li>
     </ul>
+    <button @click="reducePrice">Reduce Price</button>
   </div>
 </template>
 
 <script>
 export default {
-  //NEWIMPORTANT: use computed property to fetch vuex store data
   computed: {
     storeProducts() {
-      // code to fetch data from the store. Very easy to decipher.
-      // wrote same exact code in other component.
       return this.$store.state.products;
-    },
-    saleProducts() {
-      //NOTE: Instead of duplicating this code, which is in the other component, we use getters to write the code in one place and access the value of that getter here.
-
-      // let productsOnSale = this.$store.state.products.map(currentProduct => {
-      //   return {
-      //     name: `**${currentProduct.name}**`,
-      //     price: currentProduct.price / 2
-      //   };
-      // });
-      // return productsOnSale;
-      return this.$store.getters.saleProducts;
+    }
+    //NOTE: not using the store getter car il changeait en plus les valeurs du prix.
+    // saleProducts() {
+    //   return this.$store.getters.saleProducts;
+    // }
+  },
+  methods: {
+    reducePrice() {
+      // call on our mutation. COMMITTING our mutation.
+      // reducePrice (one below) is the name of the mutation we assigned at the store.
+      this.$store.commit("reducePrice");
     }
   },
-  // Created this created hook to see what the data structure of our store data looks like. J'ai pas fait sur l'autre component.
   created() {
     console.log(this.$store);
     console.log(this.$store.state);
