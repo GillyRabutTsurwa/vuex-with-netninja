@@ -26,7 +26,8 @@ export default {
     reducePrice() {
       // call on our mutation. COMMITTING our mutation.
       // reducePrice (one below) is the name of the mutation we assigned at the store.
-      this.$store.commit("reducePrice");
+      // this.$store.commit("reducePrice");
+      this.$store.dispatch("reducePrice");
     }
   },
   created() {
