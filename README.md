@@ -1,24 +1,3 @@
 # code
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+I think due to updates to Vue-cli, we don't need to install babel-preset-stage-2 to use mapGetters and mapActions like Shaun did in his lecture. We're fine without it.

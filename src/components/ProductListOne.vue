@@ -12,23 +12,31 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
+  // NEW: For mapping getters and actions, on le fait si on veut idéalement utiliser plusieurs getters et actions.
+
   computed: {
     storeProducts() {
       return this.$store.state.products;
-    }
+    },
     //NOTE: not using the store getter car il changeait en plus les valeurs du prix.
     // saleProducts() {
     //   return this.$store.getters.saleProducts;
     // }
+    //NEW: how to map getters. Instead of the commented-out code above, we would do something like...
+    // we only have one, but it's useful if you have a bunch of getters
+    ...mapGetters(["saleProducts"])
   },
   methods: {
-    reducePrice(amount) {
-      // call on our mutation. COMMITTING our mutation.
-      // reducePrice (one below) is the name of the mutation we assigned at the store.
-      // this.$store.commit("reducePrice");
-      this.$store.dispatch("reducePrice", amount);
-    }
+    // reducePrice(amount) {
+    //   // call on our mutation. COMMITTING our mutation.
+    //   // reducePrice (one below) is the name of the mutation we assigned at the store.
+    //   // this.$store.commit("reducePrice");
+    //   // this.$store.dispatch("reducePrice", amount);
+    // }
+    ...mapActions(["reducePrice"])
   },
   created() {
     console.log(this.$store);
