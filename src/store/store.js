@@ -27,34 +27,33 @@ export const store = new Vuex.Store({
     },
     // Not using the getter function but will leave it here regardless.
     getters: {
-        // saleProducts: (state) => {
-        //     let productsOnSale = state.products.map((currentProduct) => {
-        //         return {
-        //             name: `**${currentProduct.name}**`,
-        //             price: currentProduct.price / 2
-        //         };
-        //     });
-        //     return productsOnSale;
-        // }
+        /**
+         * saleProducts: (state) => {
+            let productsOnSale = state.products.map((currentProduct) => {
+                return {
+                    name: `**${currentProduct.name}**`,
+                    price: currentProduct.price / 2
+                };
+            });
+            return productsOnSale;
+            }   
+         */
+
     },
+    //NEWIMPORTANTNOTE - Si on veut passer un parametre sur nos mutations ou actions, on utilise le payload, que l'on pourra donc acceder dans nos declarations.
     mutations: {
-        reducePrice: (state) => {
+        reducePrice: (state, payload) => {
             state.products.forEach((currentProduct) => {
-                currentProduct.price -= 1;
+                currentProduct.price -= payload;
             });
         }
     },
-    //NEW: C'est pas idéal à utiliser les mutations quand on veut gérer le code asynchro. entrer les actions. (ici on va simuler le code asynchro avec setTimeout).
-    /**
-     * Lorsqu'on essaie de simuler le code asynchro sans actions (et avec seul les mutations), les données affichées dans le UI et dans le Vue Tools (Vuex en particulier) ne sont pas en sync. C'est donc difficile de tracer. Avec les actions. Les données s'affichent au navigateur et au Vue Devtools au même temps.
-     * IMPORTANT: Même si on a fait les mutations dans la lecture dernière, voici le moyen recommandé pour transformer les données dans notre état: utiliser les actions et appeler notre mutations (avec context.commit())
-     */
     actions: {
-        reducePrice: (context) => {
-            //NEW:IMPORTANT: context is essentially the store
-            console.log(context);
+        reducePrice: (context, payload) => {
             setTimeout(() => {
-                context.commit("reducePrice");
+                // when committing a mutation, first parametre is name of mutation.
+                // NEW: second parametre is the payload arguement: the data FROM THE MUTATION that we are dispatching so when we declare our action we have access to that data.
+                context.commit("reducePrice", payload);
             }, 3000)
         }
     }

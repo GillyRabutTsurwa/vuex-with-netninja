@@ -7,7 +7,7 @@
         <span class="price">${{currentProduct.price}}</span>
       </li>
     </ul>
-    <button @click="reducePrice">Reduce Price</button>
+    <button @click="reducePrice(10)">Reduce Price</button>
   </div>
 </template>
 
@@ -23,11 +23,11 @@ export default {
     // }
   },
   methods: {
-    reducePrice() {
+    reducePrice(amount) {
       // call on our mutation. COMMITTING our mutation.
       // reducePrice (one below) is the name of the mutation we assigned at the store.
       // this.$store.commit("reducePrice");
-      this.$store.dispatch("reducePrice");
+      this.$store.dispatch("reducePrice", amount);
     }
   },
   created() {
